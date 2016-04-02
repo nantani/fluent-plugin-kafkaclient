@@ -1,5 +1,5 @@
 # encode: utf-8
-class Fluent::KafkaOutputBuffered < Fluent::BufferedOutput
+class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
   Fluent::Plugin.register_output('kafka_out_buffered', self)
 
   # ruby-kafka plugin main options
