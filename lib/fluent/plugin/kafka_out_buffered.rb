@@ -120,13 +120,14 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
 
       record['tag'] = tag if @output_include_tag
       record['time'] = time if @output_include_time
+      encoded_record=encode(record)
 
       @producer.produce(
-        encode(record),
+        encoded_record,
         topic: @topic,
         partition_key: @partition_key
       )
-      $log.trace "message `#{record}` will be sent to `#{@topic}`."
+
       @producer.deliver_messages
     }
 
