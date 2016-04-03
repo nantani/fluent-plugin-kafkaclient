@@ -1,5 +1,5 @@
 # encode: utf-8
-class Fluent::KafkaOutputBuffered < Fluent::BufferedOutput
+class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
   Fluent::Plugin.register_output('kafka_out_buffered', self)
 
   # ruby-kafka plugin main options
@@ -14,7 +14,7 @@ class Fluent::KafkaOutputBuffered < Fluent::BufferedOutput
 
   # Sync Producer options
   config_param :required_acks, :integer, :default => 1
-  config_param :ack_timeout, :integer, :default => 5
+  config_param :ack_timeout, :integer, :default => 2
   config_param :compression_codec, :string, :default => nil
   config_param :compression_threshold, :integer, :default => 1
   config_param :max_retries, :string, :integer, :default => 2
@@ -98,6 +98,7 @@ class Fluent::KafkaOutputBuffered < Fluent::BufferedOutput
 
   def shutdown
     super
+    @producer.shutdown
   end
 
   def format(tag, time, record)
@@ -120,13 +121,14 @@ class Fluent::KafkaOutputBuffered < Fluent::BufferedOutput
 
       record['tag'] = tag if @output_include_tag
       record['time'] = time if @output_include_time
+      encoded_record=encode(record)
 
       @producer.produce(
-        encode(record),
+        encoded_record,
         topic: @topic,
         partition_key: @partition_key
       )
-      $log.trace "message `#{record}` will be sent to `#{@topic}`."
+
       @producer.deliver_messages
     }
 
