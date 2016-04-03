@@ -32,7 +32,7 @@ This is basic configuration.
   producer_type       (sync|async) :default => sync
   partition_key       (string)     :default => nil
   buffer_type         (file|memory)
-  output_data_type    (none|json|msgpack) :default => none
+  output_data_type    (text|json|msgpack) :default => text
   output_include_tag  (true|false) :default => false
   output_include_time (true|false) :default => false
 </match>

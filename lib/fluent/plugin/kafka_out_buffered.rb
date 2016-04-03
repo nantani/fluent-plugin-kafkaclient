@@ -7,7 +7,7 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
   config_param :brokers, :string, :default => 'localhost:9092'
   config_param :topic, :string, :default => nil
   config_param :partition_key, :string, :default => nil
-  config_param :output_data_type, :string, :default => nil
+  config_param :output_data_type, :string, :default => 'text'
   config_param :output_include_tag, :bool, :default => false
   config_param :output_include_time, :bool, :default => false
   config_param :producer_type, :string, :default => 'sync'
@@ -110,7 +110,7 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
       record.to_msgpack
     elsif @output_data_type == 'json'
       Yajl::Encoder.encode(record)
-    elsif none
+    elsif @output_data_type == 'text'
       record
     end
   end
