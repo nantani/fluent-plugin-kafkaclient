@@ -98,6 +98,7 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
 
   def shutdown
     super
+    @producer.shutdown
   end
 
   def format(tag, time, record)
