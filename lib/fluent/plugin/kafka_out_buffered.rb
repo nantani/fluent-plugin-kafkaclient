@@ -14,7 +14,7 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
 
   # Sync Producer options
   config_param :required_acks, :integer, :default => 1
-  config_param :ack_timeout, :integer, :default => 5
+  config_param :ack_timeout, :integer, :default => 2
   config_param :compression_codec, :string, :default => nil
   config_param :compression_threshold, :integer, :default => 1
   config_param :max_retries, :string, :integer, :default => 2
