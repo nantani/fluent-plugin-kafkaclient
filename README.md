@@ -1,6 +1,6 @@
 # Fluent::Plugin::Kafkaclient
 Fluentd plugin for Apache Kafka.
-This pluing uses [ruby-kafka](https://github.com/zendesk/ruby-kafka) as ruby client library.
+This plugin uses [ruby-kafka](https://github.com/zendesk/ruby-kafka) as ruby client library.
 
 ## Installation
 
