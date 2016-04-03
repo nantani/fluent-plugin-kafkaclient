@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kazuki Minamiya"]
   spec.email         = ["minami.ind@gmail.com"]
 
-  spec.summary       = %q{Kafka client plugin which supports version 0.9 of kafka.}
-  spec.description   = %q{Kafka client Plugin which supports version 0.9 of kafka.}
+  spec.summary       = %q{Fluentd plugin for Apache Kafka, which supports version 0.9 of kafka.}
+  spec.description   = %q{Fluentd plugin for Apache Kafka, which supports version 0.9 of kafka.}
   spec.homepage      = "https://github.com/nantani/fluent-plugin-kafkaclient"
   spec.license       = "APLv2"
 
