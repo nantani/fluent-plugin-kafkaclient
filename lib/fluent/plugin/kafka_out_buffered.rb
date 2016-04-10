@@ -93,7 +93,7 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
 
   def start
     super
-    build_producer()
+    build_producer
   end
 
   def shutdown
