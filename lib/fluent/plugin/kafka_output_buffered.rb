@@ -36,7 +36,7 @@ class Fluent::KafkaOutPutBuffered < Fluent::BufferedOutput
   def initialize
     super
     require 'kafka'
-    require "active_support/notifications"
+    require 'active_support/notifications'
     require 'Yajl'
   end
 
@@ -106,12 +106,13 @@ class Fluent::KafkaOutPutBuffered < Fluent::BufferedOutput
   end
 
   def encode(record)
-    if @output_data_type == 'msgpack'
-      record.to_msgpack
-    elsif @output_data_type == 'json'
-      Yajl::Encoder.encode(record)
-    elsif @output_data_type == 'text'
-      record
+    case @output_data_type
+      when 'msgpack'
+        record.to_msgpack
+      when 'json'
+        Yajl::Encoder.encode(record)
+      when 'text'
+        record
     end
   end
 
