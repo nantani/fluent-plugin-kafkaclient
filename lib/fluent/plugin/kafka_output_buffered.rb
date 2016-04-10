@@ -1,6 +1,6 @@
 # encode: utf-8
-class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
-  Fluent::Plugin.register_output('kafka_out_buffered', self)
+class Fluent::KafkaOutPutBuffered < Fluent::BufferedOutput
+  Fluent::Plugin.register_output('kafka_output_buffered', self)
 
   # ruby-kafka plugin main options
   config_param :client_id, :string, :default => 'producer_000'
