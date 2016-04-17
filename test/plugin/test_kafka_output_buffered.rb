@@ -2,7 +2,7 @@ require 'helper'
 require 'yajl'
 require 'msgpack'
 
-class KafkaOutBufferedTest < Test::Unit::TestCase
+class KafkaOutPutBufferedTest < Test::Unit::TestCase
   def setup
     Fluent::Test.setup
   end
@@ -22,7 +22,7 @@ class KafkaOutBufferedTest < Test::Unit::TestCase
   end
 
   def create_driver(conf = default_config, tag='test')
-    Fluent::Test::BufferedOutputTestDriver.new(Fluent::KafkaOutBuffered, tag).configure(conf)
+    Fluent::Test::BufferedOutputTestDriver.new(Fluent::KafkaOutPutBuffered, tag).configure(conf)
   end
 
 

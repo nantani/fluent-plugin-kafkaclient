@@ -1,13 +1,13 @@
 # encode: utf-8
-class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
-  Fluent::Plugin.register_output('kafka_out_buffered', self)
+class Fluent::KafkaOutPutBuffered < Fluent::BufferedOutput
+  Fluent::Plugin.register_output('kafka_output_buffered', self)
 
   # ruby-kafka plugin main options
   config_param :client_id, :string, :default => 'producer_000'
   config_param :brokers, :string, :default => 'localhost:9092'
   config_param :topic, :string, :default => nil
   config_param :partition_key, :string, :default => nil
-  config_param :output_data_type, :string, :default => nil
+  config_param :output_data_type, :string, :default => 'text'
   config_param :output_include_tag, :bool, :default => false
   config_param :output_include_time, :bool, :default => false
   config_param :producer_type, :string, :default => 'sync'
@@ -36,7 +36,7 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
   def initialize
     super
     require 'kafka'
-    require "active_support/notifications"
+    require 'active_support/notifications'
     require 'Yajl'
   end
 
@@ -93,7 +93,7 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
 
   def start
     super
-    build_producer()
+    build_producer
   end
 
   def shutdown
@@ -106,12 +106,13 @@ class Fluent::KafkaOutBuffered < Fluent::BufferedOutput
   end
 
   def encode(record)
-    if @output_data_type == 'msgpack'
-      record.to_msgpack
-    elsif @output_data_type == 'json'
-      Yajl::Encoder.encode(record)
-    elsif none
-      record
+    case @output_data_type
+      when 'msgpack'
+        record.to_msgpack
+      when 'json'
+        Yajl::Encoder.encode(record)
+      when 'text'
+        record
     end
   end
 

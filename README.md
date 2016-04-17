@@ -1,6 +1,6 @@
 # Fluent::Plugin::Kafkaclient
 Fluentd plugin for Apache Kafka.
-This pluing uses [ruby-kafka](https://github.com/zendesk/ruby-kafka) as ruby client library.
+This plugin uses [ruby-kafka](https://github.com/zendesk/ruby-kafka) as ruby client library.
 
 ## Installation
 
@@ -32,7 +32,7 @@ This is basic configuration.
   producer_type       (sync|async) :default => sync
   partition_key       (string)     :default => nil
   buffer_type         (file|memory)
-  output_data_type    (none|json|msgpack) :default => none
+  output_data_type    (text|json|msgpack) :default => text
   output_include_tag  (true|false) :default => false
   output_include_time (true|false) :default => false
 </match>
@@ -69,6 +69,15 @@ These Parameters can be used for Async Producer.
 ```
 - ```deliver_threshold``` Trigger a delivery once 'deliver_threshold' messages have been buffered
 - ```delivery_interval``` Trigger a delivery every 'delivery_interval' seconds.
+
+#### Consumer
+These Parameters can be used for Comsumer.
+
+```
+  config_param :brokers, :string, :default => 'localhost:9092'
+  config_param :topic, :string, :default => test
+  config_param :group, :string, :default => 'consumer001'
+```
 
 ### Encryption and Authentication using TSL
 
