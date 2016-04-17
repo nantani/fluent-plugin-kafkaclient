@@ -70,6 +70,15 @@ These Parameters can be used for Async Producer.
 - ```deliver_threshold``` Trigger a delivery once 'deliver_threshold' messages have been buffered
 - ```delivery_interval``` Trigger a delivery every 'delivery_interval' seconds.
 
+#### Consumer
+These Parameters can be used for Comsumer.
+
+```
+  config_param :brokers, :string, :default => 'localhost:9092'
+  config_param :topic, :string, :default => test
+  config_param :group, :string, :default => 'consumer001'
+```
+
 ### Encryption and Authentication using TSL
 
 ```
